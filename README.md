@@ -1,4 +1,5 @@
-# my_flask
+## COMP 446
+# my_flask (in-class follow-along project)
 This repo is an active project we have been using as practice to demonstrate various concepts with Flask
 
 # notes
