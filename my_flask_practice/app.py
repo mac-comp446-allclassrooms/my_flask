@@ -16,6 +16,27 @@ class Friends(db.Model):
     def __repr__(self):
         return '<Name %r' % self.id
 
+@app.route("/friends", methods=['POST', 'GET'])
+def friends():
+    title = "My Friends List, yay!"
+
+    if request.method == "POST":
+        # add to database
+        friend_name = request.form['name']
+        new_friend = Friends(name=friend_name)
+        # push into database
+
+        try:
+            db.session.add(new_friend)
+            db.session.commit()
+            return redirect('/friends')
+        except:
+            return "There was an error adding this to the database..."
+    
+    else:
+        friends = Friends.query.order_by(Friends.date_created)
+        return render_template('friends.html', title=title, friends=friends)
+    
 @app.route("/")
 def index():
     title = "The best page ever!"
