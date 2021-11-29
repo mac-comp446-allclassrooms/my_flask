@@ -60,6 +60,17 @@ def process():
     first_name = request.form.get("first_name")
     last_name = request.form.get("last_name")
     email = request.form.get("email")
+    
+    #added on nov.29
+    #actual email message body that gets sent to user 
+    message = "You have subscribed to my Heroku site newsletter! Thanks!!!"
+    # gmail smtp port listening
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls() #starting the server using tls method
+    # creating login for the sender username and password (may need environment variable)
+    server.login("joslennepena@gmail.com", "PASSWORD")
+    # sending mail once user fills contact form, pass in email and message
+    server.sendmail("joslennepena@gmail.com", email, message)
 
     if not first_name or not last_name or not email: 
         error_statement = "Hey you there is an error..."
